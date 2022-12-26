@@ -22,12 +22,11 @@ class Parser(report_sxw.rml_parse):
 
     def set_context(self, objects, data, ids, report_type=None):
         self.form = data["form"]
-        self.date = self.form["date"]
+        self.year = self.form["year"]
         return super(Parser, self).set_context(objects, data, ids, report_type)
 
-    def get_date(self):
-        convert_dt = datetime.strptime(self.date, "%Y-%m-%d")
-        return convert_dt.strftime("%d %B %Y")
+    def get_year(self):
+        return self.year
 
     def _get_amortization_type(self):
         type_id = self.form["type_id"]
@@ -49,8 +48,10 @@ class Parser(report_sxw.rml_parse):
         else:
             obj_amortization = self.pool.get("account.prepaid_income_amortization")
 
+        date_end = datetime(self.date, 12, 31).strftime("%Y-%m-%d")
+
         criteria = [
-            ("date", "<=", self.date),
+            ("date", "<=", date_end),
             ("state", "in", ["open", "done"]),
         ]
 
@@ -70,10 +71,7 @@ class Parser(report_sxw.rml_parse):
                 res = {
                     "no": self.no,
                     "name": amortization.name,
-                    "account": amortization.account_id.display_name,
                     "amount": amortization.amount,
-                    "amount_per_period": amortization.amount
-                    / amortization.period_number,
                     "start_date": convert_dt.strftime("%d %B %Y"),
                     "age": amortization.period_number,
                     "amount_amortized": amount_amortized,

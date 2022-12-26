@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 OpenSynergy Indonesia
+     Copyright 2021 PT. Simetri Sinergi Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<openerp>
+<data>
+
+<record id="account_wizard_print_yearly_amortization_view_form" model="ir.ui.view">
+    <field name="name">Print Yearly Amortization</field>
+    <field name="model">account.wizard_print_yearly_amortization</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+        <form>
+            <group col="2" colspan="2">
+                <field name="year" />
+                <field name="type_id" />
+                <field name="output_format" widget="radio" />
+            </group>
+            <footer>
+                <button
+                            name="button_print_report"
+                            string="Print"
+                            colspan="1"
+                            type="object"
+                            class="oe_highlight"
+                        />
+                or
+                <button special="cancel" string="_Cancel" class="oe_link" />
+            </footer>
+        </form>
+    </field>
+</record>
+
+<record
+            id="account_wizard_print_yearly_amortization_action"
+            model="ir.actions.act_window"
+        >
+    <field name="name">Print Yearly Amortization</field>
+    <field name="res_model">account.wizard_print_yearly_amortization</field>
+    <field name="view_type">form</field>
+    <field name="view_id" ref="account_wizard_print_yearly_amortization_view_form" />
+    <field name="target">new</field>
+</record>
+
+
+<menuitem
+            id="account_wizard_print_yearly_amortization_menu"
+            name="Yearly Amortization Report"
+            parent="menu_account_amortization_reporting"
+            action="account_wizard_print_yearly_amortization_action"
+            sequence="2"
+        />
+
+</data>
+</openerp>

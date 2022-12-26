@@ -5,4 +5,5 @@
 
 from . import (
     wizard_account_amortization,
+    # wizard_account_yearly_amortization,
 )
