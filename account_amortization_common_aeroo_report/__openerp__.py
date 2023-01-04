@@ -5,7 +5,7 @@
 
 {
     "name": "Amortization Common Aeroo Report",
-    "version": "8.0.1.1.3",
+    "version": "8.0.1.1.4",
     "website": "https://simetri-sinergi.id",
     "author": "PT. Simetri Sinergi Indonesia, OpenSynergy Indonesia",
     "depends": [
