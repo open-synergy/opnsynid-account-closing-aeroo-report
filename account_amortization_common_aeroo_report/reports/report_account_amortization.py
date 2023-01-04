@@ -50,7 +50,7 @@ class Parser(report_sxw.rml_parse):
             obj_amortization = self.pool.get("account.prepaid_income_amortization")
 
         criteria = [
-            ("date_start", "<=", self.date),
+            ("date_start", "<=", self.date_start),
             ("state", "in", ["open", "done"]),
         ]
 
@@ -62,7 +62,7 @@ class Parser(report_sxw.rml_parse):
             for amortization in obj_amortization.browse(
                 self.cr, self.uid, amortization_ids
             ):
-                convert_dt = datetime.strptime(amortization.date, "%Y-%m-%d")
+                convert_dt = datetime.strptime(amortization.date_start, "%Y-%m-%d")
                 amount_amortized = self._get_amount_amortized(
                     amortization.id, self.date
                 )
